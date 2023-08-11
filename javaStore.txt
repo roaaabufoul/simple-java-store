@@ -1,0 +1,169 @@
+> Roaa Khaled:
+import java.util.Scanner;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+/**
+ *
+ * @author Lenovo
+ */
+public class FinalProject0 {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        Scanner pro = new Scanner(System.in);
+
+        String name[] = new String[100];
+        int quantity[] = new int[100];
+        double price[] = new double[100];
+        int cart[] = new int[100];
+
+        for (int i = 0; i < 100; i++) {
+            quantity[i] = -1;
+            cart[i] = 0;
+        }
+        name[0] = "Laptop";
+        name[1] = "Television";
+        name[2] = "Mobile";
+        name[3] = "Headphones";
+//        name[4] = "product4";
+//        name[5] = "product5";
+//        name[6] = "product6";
+//        name[7] = "product7";
+//        name[8] = "product8";
+//        name[9] = "product9";
+//        name[10] = "product10";
+        //////////////////////////////
+        quantity[0] = 30;
+        quantity[1] = 50;
+        quantity[2] = 100;
+        quantity[3] = 6;
+//        quantity[4] = 30;
+//        quantity[5] = 50;
+//        quantity[6] = 100;
+//        quantity[7] = 9;
+//        quantity[8] = 20;
+//        quantity[9] = 8;
+//        quantity[10] = 5;
+        /////////////////////////////
+        price[0] = 900;
+        price[1] = 500;
+        price[2] = 250.5;
+        price[3] = 2.3;
+
+        ////////////////////////////////////
+        int selectedProductNo = 0, selectedProductIndex = 0, wantedItems = 0;
+        while (true) {
+            //////// print the main screen for the user
+            System.out.println("\n1)show products in the store"
+                    + "\n2)Add to cart"
+                    + "\n3)Remove from cart"
+                    + "\n4)Display cart & Total price"
+                    + "\n5)Exit!");
+
+            int ch = pro.nextInt();
+            switch (ch) {
+                case 1:
+                                        System.out.println("----------------------------------");
+
+                    /////// loop throgh all the items on the stor unless the quantity=-1
+                    for (int i = 0; i < 100 && quantity[i] != -1; i++) {
+
+                        int j = i + 1;
+                        System.out.println("product Number: " + j + "\nProduct Name: " + name[i] + "\nAvailape items:" + quantity[i] + "\nPrice/Item: " + price[i] + "$\n--------------------");
+
+                    }
+                    break;
+
+                case 2:
+                                        System.out.println("----------------------------------");
+
+                    System.out.println("\n Enter the product number to add in the cart :");
+                    selectedProductNo = pro.nextInt();
+                    selectedProductIndex = selectedProductNo - 1;
+                    if (cart[selectedProductIndex] != 0) {
+                        System.out.println(name[selectedProductIndex] + " already exist in the cart. ");
+                    }
+                    System.out.println("How many " + name[selectedProductIndex] + "s do you want to add?");
+                    wantedItems = pro.nextInt();
+                    if (wantedItems > quantity[selectedProductIndex]) {
+                        System.out.println("Quantity not available");
+                        wantedItems = 0;
+                    } else {
+                        cart[selectedProductIndex] += wantedItems;
+                        quantity[selectedProductIndex] -= wantedItems;
+                        System.out.println("Done successfully.");
+                    }
+
+                    break;
+                case 3:
+                                        System.out.println("----------------------------------");
+
+                    /////////// عرض محتويات سلة التسوق
+                    int c = 0;
+                    double total = 0;
+                    for (int i = 0; i < 100; i++) {
+                        if (cart[i] != 0) {
+
+> Roaa Khaled:
+c += 1;
+                            int j = i + 1;
+                            System.out.println("Product Name:" + name[i] +"\nProduct Nuber: "+j+ "\nQuantity you added to the cart:" + cart[i] + "items\nprice =" + (price[i] * cart[i])+"\n-----------------");
+                            total += cart[i] * price[i];
+                        }
+                    }
+                    if (c == 0) {
+                        System.out.println("The cart has no products.");
+                    } else {
+                        System.out.println("\nTotal price = " + total + "$");
+                    }
+                    ///////////// ازالة عناصر من سلة التسوق
+                    System.out.println("--------------------------------\n Enter the product number to remove from the cart :");
+                    selectedProductNo = pro.nextInt();
+                    selectedProductIndex = selectedProductNo - 1;
+                    if (cart[selectedProductIndex] == 0) {
+                        System.out.println(name[selectedProductIndex] + " does not exist in the cart. ");
+                    } else {
+                        System.out.println("How many" + name[selectedProductIndex] + "s you want to remove from the cart?");
+                        wantedItems = pro.nextInt();
+                        cart[selectedProductIndex] -= wantedItems;
+                        quantity[selectedProductIndex] += wantedItems;
+                        System.out.println("you have removed "+wantedItems+" "+name[selectedProductIndex] +" From the cart ^_^");
+                    }
+                    break;
+                case 4:
+                    System.out.println("----------------------------------");
+                    c = 0;
+                    total = 0;
+                    for (int i = 0; i < 100; i++) {
+                        if (cart[i] != 0) {
+                            c += 1;
+                            int j = i + 1;
+                            System.out.println("Product Name:" + name[i] +"\nProduct Nuber: "+j+ "\nQuantity you added to the cart:" + cart[i] + "items\nprice =" + (price[i] * cart[i])+"\n-----------------");
+                            total += cart[i] * price[i];
+                        }
+                    }
+                    if (c == 0) {
+                        System.out.println("The cart has no products.");
+                    } else {
+                        System.out.println("\nTotal price =" + total + "$");
+                    }
+                    break;
+                case 5:
+                    System.out.println("Bye!!");
+                    System.exit(0);
+
+                default:
+                    System.out.println("wrong input!! pleas enter a valed choice:");
+                    //  f = 0;
+                    break;
+            }
+        }
+
+    }
+}
